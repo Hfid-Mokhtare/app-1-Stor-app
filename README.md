@@ -26,7 +26,7 @@ All visual assets are stored in the `app1Screenshotes` directory.
 
 | Welcome Screen | Create Account |
 | :---: | :---: |
-| ![Welcome](app1Screenshotes/Screenshot_20251216_173946.jpg) | ![Create Account](app1Screenshotes/Screenshot_20251216_173746.jpg) |
+| ![Welcome](app1Screenshotes/Screenshot_20251216_173946.png) | ![Create Account](app1Screenshotes/Screenshot_20251216_173746.png) |
 
 | Checkout Flow | Success Popup | Forgot Password |
 | :---: | :---: | :---: |
