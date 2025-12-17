@@ -1,53 +1,56 @@
 ## 🛍️ E-Commerce Flow UI (Android Native)
 
-A simple, visually appealing UI implementation demonstrating key navigation and interaction flows common in modern e-commerce and authentication applications, built using **Android's native XML layout system** and **Kotlin**.
+A clean UI implementation for modern e-commerce apps, built using **Android's native XML layout system** and **Kotlin**.
 
-### ✨ Features Demonstrated
+### ✨ Features & Brands
 
-This project showcases the XML structure and Kotlin logic for four core mobile application screens:
+**Action Table**
+| Feature | Primary Action | Resulting View |
+| :--- | :--- | :--- |
+| **Onboarding** | "Get Started" | Navigates to Create Account |
+| **Registration** | "Create Account" | Form Submission / Account Creation |
+| **Checkout** | "Continue" | Processes Payment |
+| **Password Recovery** | "Submit" | Sends Reset Link to Email |
 
-1.  **Splash Screen/Welcome:** Full-screen background image layering with centered text and a primary action button.
-2.  **Authentication (`Create Account`):** Complex form layout using `TextInputLayout` (implied by design) and integrating social login options.
-3.  **Checkout Flow:** Multi-row, structured data presentation (`Order`, `Shipping`, `Total`), custom payment method selection, and a sticky action button.
-4.  **Modal/Popup Handling:** Demonstrates how to use a hidden `FrameLayout` overlay to display a success message ("Payment done successfully") when a button is clicked.
-5.  **Robust Navigation:** Implements `Intent` navigation between Activities and correct use of the `finish()` method for the "Go Back" action.
+**Brand Table**
+| Category | Supported Brands |
+| :--- | :--- |
+| **Social Login** | Google, Apple, Facebook |
+| **Payments** | VISA, PayPal, MasterCard, Apple Pay |
+
+---
 
 ### 🖼️ Screenshots
 
-**NOTE:** For these images to display correctly on GitHub, you must upload the corresponding files to your repository (e.g., in the root directory or an `images/` folder).
+All visual assets are stored in the `app1Screenshotes` directory.
 
-| Welcome Screen | Create Account | Checkout Flow | Success Popup |
-| :---: | :---: | :---: | :---: |
-| ![Welcome Screen](Screenshot_20251216_173946.jpg) | ![Create Account](Screenshot_20251216_173746.jpg) | ![Checkout Screen](Screenshot 2025-12-16 141921.png) | ![Payment Success](Screenshot 2025-12-16 145920.png) |
+| Welcome Screen | Create Account |
+| :---: | :---: |
+| ![Welcome](app1Screenshotes/Screenshot_20251216_173946.jpg) | ![Create Account](app1Screenshotes/Screenshot_20251216_173746.jpg) |
 
-### 🛠️ Technology Stack
+| Checkout Flow | Success Popup | Forgot Password |
+| :---: | :---: | :---: |
+| ![Checkout](app1Screenshotes/Screenshot_20251216_174009.png) | ![Success](app1Screenshotes/Screenshot_20251216_174031.png) | ![Forgot Pass](app1Screenshotes/Screenshot_20251216_174109.png) |
 
-* **Platform:** Android Native
-* **Language:** Kotlin
-* **Layouts:** Android XML (`LinearLayout`, `FrameLayout`)
-* **Tooling:** Android Studio
+---
 
 ### 🏗️ Key Implementation Details
 
-#### **1. XML Structure for Stacking (Splash & Popups)**
-
+#### **1. UI Layering (Splash & Popups)**
 The project utilizes `FrameLayout` for screens where content must be layered:
 * **Splash Screen:** An `ImageView` (`centerCrop`) is layered beneath a `TextView` and `Button`.
-* **Checkout Success Modal:** The primary `LinearLayout` for the checkout form is layered beneath a transparent, full-screen `FrameLayout` (`#99000000` background for dimming) which contains the centered white dialog box.
+* **Checkout Success Modal:** The primary `LinearLayout` for the checkout form is layered beneath a transparent, full-screen `FrameLayout` (`#99000000` background) which contains the centered success message.
 
-#### **2. Layout Composition (Checkout Flow)**
+#### **2. Layout Composition**
+The Checkout screen uses nested `LinearLayout` elements. Horizontal layouts align labels ("Order") with values ("₹ 7,000") using `android:layout_weight="1"`.
 
-The Checkout screen is built using nested `LinearLayout` elements:
-* The main vertical `LinearLayout` contains sections for `Price Details` and `Payment Methods`.
-* Horizontal `LinearLayouts` are used inside the `Price Details` section to align labels ("Order", "Shipping") with values ("₹ 7,000", "₹ 30") using `android:layout_weight="1"`.
-
-#### **3. Kotlin Navigation (`Intents`)**
-
-Navigation between Activities is handled reliably using explicit `Intents`:
+#### **3. Security & Logic**
+* **Hashing:** Implements password hashing before data transmission to ensure user credential security.
+* **Navigation:** Explicit `Intents` handle movement between Activities:
 
 ```kotlin
-// Example: Navigating from Create Account to Get Started
+// Example: Navigation Logic
 createAccountButton.setOnClickListener {
-    val intent = Intent(this, GetStartActivity::class.java)
+    val intent = Intent(this, CheckoutActivity::class.java)
     startActivity(intent)
 }
